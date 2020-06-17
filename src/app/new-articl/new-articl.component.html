@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="col-md-9 col-sm-6 col-xs-10">
+    <div class="panel panel-default">
+      <div class="panel-heading">Nouveau Articl </div>
+      <div class="panel-body" >
+
+        <form #f="ngForm" (ngSubmit)="onSaveArticl(f.value)">
+          <div class="form-group">
+            <label class="control-label">Nom de l'articl </label>
+            <input class="form-control" type="text" name="name" ngModel>
+          </div>
+
+          <div class="form-group">
+            <span >
+             <label class="control-label">photo </label>
+            <input type="file" (change)="onSelectFile($event)">
+            <button class="btn btn-success btn-sm" (click)="uploadPhoto()">
+              <span class="glyphicon glyphicon-upload"></span>
+            </button>
+             {{progress}}
+          </span>
+          </div>
+
+          <div>
+            <label class="control-label">Date de publication </label>
+            <input class="form-control" type="date" name="datePublication" ngModel>
+          </div>
+
+
+            <div>
+            <label class="control-label">Description </label>
+            <input class="form-control" type="text" name="description" ngModel>
+          </div>
+
+
+          <button class="btn btn-success" type="submit">Save</button>
+        </form>
+
+      </div>
+      <div class="panel-body" *ngIf="mode==2">
+        <button  class="btn btn-success" (click)="onNewArticl()">Nouveau Produit </button>
+        <div class="form-group">
+          <p></p>
+          <label >ID :</label><label>{{currentArticl.id}}</label><br>
+          <label >Nom :</label><label>{{currentArticl.name}}</label><br>
+
+          <label >Date :</label><label>{{currentArticl.datePublication |date: "dd:MMM:yyyy hh-mm-ss z" }}</label><br>
+          <label >Photo :</label><label>{{currentArticl.photoName}}</label><br>
+          <label >Description :</label><label>{{currentArticl.description}}</label><br>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

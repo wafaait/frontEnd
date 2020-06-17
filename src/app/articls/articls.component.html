@@ -1,0 +1,60 @@
+
+<div *ngIf="articls">
+  <div> <h3>{{title}}</h3></div>
+  <div *ngFor="let a of articls._embedded.articls">
+    <div class="col-md-6 ">
+    <div class=" panel panel-default heighted">
+      <div class="panel panel-heading backroundPanel">{{a.name}}</div>
+      <div class="panel-body">
+        <img  class="img-thumbnail img-rounded" (click)="onArticlDetails(a)" height="30" src="{{this.catServise.host+'/photoArticl/'+a.id+'?ts='+getTs()}}"/>
+
+        <div *ngIf="idAdmin()">
+          <p>
+            <button (click)="onEditPhoto(a)" >
+              <span class="glyphicon glyphicon-edit"></span>
+            </button>
+          </p>
+          <p *ngIf="editPhoto && currectArticl==a">
+            <input type="file" (change)="onSelectedFile($event)">
+            <button class="btn btn-success" (click)="uploadPhoto()">Upload</button>
+            {{progress}}
+          </p>
+        </div>
+        <div class="row">
+        <div class="col-md-8">
+
+           Publié le : {{a.datePublication |date: 'dd/MM/yyyy hh:mm:ss'}}
+        </div>
+
+        <div class="col-md-4">
+          <div *ngIf="a.available">
+            <img  src="assets/available2.png" class="img-thumbnail img-circle iconImage"  height="30">
+          </div>
+          <div *ngIf="a.selected">
+            <img  src="assets/selected1.png" class="img-thumbnail img-circle iconImage"  height="30">
+          </div>
+        </div>
+        </div>
+        <div>
+          <form #f="ngForm" (ngSubmit)="onAddArticlToCaddy(a)">
+            <button>
+              <img src="assets/caddy1.png"  width="40%" height="40%">
+            </button>
+          </form>
+        </div>
+
+
+
+
+
+
+
+      </div>
+
+
+
+  </div>
+  </div>
+
+
+</div>

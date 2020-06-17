@@ -1,0 +1,26 @@
+<div class="panel panel-heading">
+  <div class="panel-heading">Caddies</div>
+  <div class="panel-body">
+    <table class="table table-striped">
+      <tr>
+        <th>ID</th><th>Name</th><th>DatePublication</th><th>Available</th><th>Description</th>
+      </tr>
+      <tr *ngFor="let ai of pannierservice.articles">
+        <td>{{ai.id}}</td>
+        <td>{{ai.name}}</td>
+        <td>{{ai.datePublication}}</td>
+        <td>{{ai.available}}</td>
+        <td>{{ai.description}}</td>
+        <td>
+          <button class="btn btn-danger" (click)="onRemoveArticlFromCaddy(ai)">
+            <span class="glyphicon glyphicon-remove"></span>
+          </button>
+        </td>
+
+
+
+      </tr>
+    </table>
+    <button class="btn btn-success" (click)="onNewOrder()">Commander</button>
+  </div>
+</div>

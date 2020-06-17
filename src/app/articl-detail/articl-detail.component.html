@@ -1,0 +1,78 @@
+<div *ngIf="currentArticl">
+  <div class="panel panel-default" *ngIf="mode==0">
+    <div class="panel-heading">Fiche Articl : {{currentArticl.name}}
+      <span class="glyphicon glyphicon-edit pull-right btn" (click)="onEditArticl()"></span>
+    </div>
+    <div class="panel-body">
+      <div class="col-md-4">
+        <img class="img-thumbnail" [src]="this.catalService.host+'/photoArticl/'+currentArticl.id+'?ts='+getTs()"/>
+        <div *ngIf="this.authService.idAdmin()">
+          <button *ngIf="!editPhoto" (click)="onEditPhoto(currentArticl)">
+            <span class="glyphicon glyphicon-edit"></span>
+          </button>
+          <span *ngIf="editPhoto">
+            <input type="file" (change)="onSelectFile($event)">
+            <button class="btn btn-success btn-sm" (click)="uploadPhoto()">
+              <span class="glyphicon glyphicon-upload"></span>
+            </button>
+            {{progress}}
+          </span>
+        </div>
+
+        <div>
+
+          <span *ngIf="currentArticl.selected">
+                <img src="assets/selected1.png" class="img-thumbnail img-circle"  width="20%" height="20%">
+              </span>
+          <span *ngIf="currentArticl.available">
+                <img src="assets/available2.png" class="img-thumbnail img-circle"   width="20%" height="20%">
+              </span>
+        </div>
+        <div>
+          <form #f="ngForm" (ngSubmit)="onAddArticlToCaddy(currentArticl)">
+            <button>
+              <img src="assets/caddy1.png"  width="20%" height="20%">
+            </button>
+          </form>
+        </div>
+
+      </div>
+      <div class="col-md-7">
+        <div class="panel panel-default" style="min-height: 300px">
+          <div class="panel-body">
+            <label>Publié le :{{currentArticl.datePublication|date: 'dd/MM/yyyy hh:mm:ss'}}</label>
+          </div>
+          <div class="panel-body">
+            Description :{{currentArticl.description}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="mode==1">
+    <form #f="ngForm" (ngSubmit)="onUpdateArticl(f.value)">
+      <div class="form-group">
+        <label class="control-label">Name:</label>
+        <input type="text" name="name" ngModel [(ngModel)]="currentArticl.name" class="form-control">
+      </div>
+      <div class="form-group">
+        <label class="control-label">Description:</label>
+        <textarea name="description" ngModel [(ngModel)]="currentArticl.description" class="form-control"></textarea>
+      </div>
+      <div class="form-group">
+        <label class="control-label">Date de Publication:</label>
+        <input type="datetime-local" name="currentPrice" ngModel [(ngModel)]="currentArticl.datePublication" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label class="control-label">Sélection:</label>
+        <input type="checkbox" name="selected" ngModel [(ngModel)]="currentArticl.selected" >
+      </div>
+      <div class="form-group">
+        <label class="control-label">Available:</label>
+        <input type="checkbox" name="available" ngModel [(ngModel)]="currentArticl.available" >
+      </div>
+      <button class="btn btn-success" type="submit">Update</button>
+    </form>
+  </div>
+</div>
