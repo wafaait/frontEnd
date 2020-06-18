@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+.deposerarticle{
+	color: white !important;
+	font-weight: bold;
+	background-color: rgba(0,200,0);
+}
+
+.deposerarticle:hover{
+	color: white !important;
+	font-weight: bold;
+	background-color: rgba(0,200,0) !important;
+}
